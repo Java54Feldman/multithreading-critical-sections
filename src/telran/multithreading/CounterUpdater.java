@@ -17,10 +17,8 @@ public class CounterUpdater extends Thread {
 		}
 	}
 
-	private void counterIncrement() {
-		synchronized (mutex) {
+	synchronized static private void counterIncrement() {
 			counter++;
-		}
 	}
 
 	public static long getCounter() {
