@@ -1,9 +1,10 @@
 package telran.multithreading;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 public class CounterUpdater extends Thread {
 	
-	private static long counter;
-	private static final Object mutex = new Object();
+	private static AtomicLong counter = new AtomicLong(0);
 	private int nRuns;
 		
 	public CounterUpdater(int nRuns) {
@@ -17,12 +18,12 @@ public class CounterUpdater extends Thread {
 		}
 	}
 
-	synchronized static private void counterIncrement() {
-			counter++;
+	private void counterIncrement() {
+		counter.getAndIncrement();
 	}
 
 	public static long getCounter() {
-		return counter;
+		return counter.get();
 	}
 	
 }
